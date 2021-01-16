@@ -6,7 +6,7 @@ DEFAULTBOLD="\e[1m"
 RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
-BLUE="\e[34m"
+CYAN="\e[36m"
 
 # If script wasn't executed as root, exit
 if [[ $(whoami) != "root" ]]; then
@@ -35,15 +35,15 @@ username=$1
 apt update 1>/dev/null 2>/dev/null && apt upgrade -y 1>/dev/null 2>/dev/null
 
 # Install Git
-echo -e "\n${BLUE}[+] Installing Git${DEFAULT}"
+echo -e "\n${CYAN}[+] Installing Git${DEFAULT}"
 apt install -y git 1>/dev/null 2>/dev/null
 
 # Install Gnome Tweaks
-echo -e "\n${BLUE}[+] Installing Gnome Tweaks${DEFAULT}"
+echo -e "${CYAN}[+] Installing Gnome Tweaks${DEFAULT}"
 apt install -y gnome-tweaks 1>/dev/null 2>/dev/null
 
 # Install Brave Browser
-echo -e "\n${BLUE}[+] Installing Brave Browser${DEFAULT}"
+echo -e "${CYAN}[+] Installing Brave Browser${DEFAULT}"
 
 apt install -y apt-transport-https curl gnupg 1>/dev/null 2>/dev/null
 curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
@@ -53,15 +53,15 @@ apt update 1>/dev/null 2>/dev/null
 apt install -y brave-browser 1>/dev/null 2>/dev/null
 
 # Install common utils
-echo -e "\n${BLUE}[+] Installing neovim${DEFAULT}"
+echo -e "${CYAN}[+] Installing neovim${DEFAULT}"
 apt install -y neovim 1>/dev/null 2>/dev/null
 
 # Install snap garbage
-echo -e "\n${BLUE}[+] Installing VLC${DEFAULT}"
+echo -e "${CYAN}[+] Installing VLC${DEFAULT}"
 snap install vlc
 
 # Install Alacritty
-echo -e "\n${BLUE}[+] Building and installing Alacritty${DEFAULT}"
+echo -e "${CYAN}[+] Building and installing Alacritty${DEFAULT}"
 
 apt install -y cargo 1>/dev/null 2>/dev/null
 apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 1>/dev/null 2>/dev/null
@@ -80,7 +80,7 @@ update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /
 update-alternatives --config x-terminal-emulator
 
 # Download custom alacritty config-
-echo -e "\n${BLUE}[+] Customizing Alacritty${DEFAULT}"
+echo -e "${CYAN}[+] Customizing Alacritty${DEFAULT}"
 
 git clone https://github.com/AviusX/dotfiles avius-dotfiles 1>/dev/null
 mv /home/$username/avius-dotfiles/alacritty.yml /home/$username/.alacritty.yml
@@ -88,7 +88,7 @@ chown $username /home/$username/.alacritty.yml
 rm -rf /home/$username/avius-dotfiles
 
 # Install Fira Code
-echo -e "\n${BLUE}[+] Installing font firacode${DEFAULT}"
+echo -e "${CYAN}[+] Installing font firacode${DEFAULT}"
 apt install -y fonts-firacode 1>/dev/null 2>/dev/null
 
 # Create the themes and icons folders-
@@ -99,8 +99,8 @@ chown -R $username /home/$username/.themes; chown -R $username /home/$username/.
 echo -e "\n${DEFAULTBOLD}Note: In the next step, you will be prompted to choose a GRUB theme. A website will open where you can preview each theme before choosing one for yourself.${DEFAULT}"
 read -n 1 -s -r -p "Press any key to continue..."
 
-echo -e "\n\n${BLUE}[+] Opening website for theme preview...${DEFAULT}"
-sudo -u $username brave-browser-stable 'https://github.com/vinceliuice/grub2-themes' & 1>/dev/null 2>/dev/null
+echo -e "\n\n${CYAN}[+] Opening website for theme preview...${DEFAULT}"
+sudo -u $username brave-browser-stable 'https://github.com/vinceliuice/grub2-themes' 1>/dev/null 2>/dev/null & 
 
 # Install Grub Theme
 echo -e "\n${YELLOW}Available GRUB themes-"
