@@ -86,7 +86,7 @@ echo -e "${CYAN}[+] Customizing Alacritty${DEFAULT}"
 
 git clone https://github.com/AviusX/dotfiles avius-dotfiles 1>/dev/null
 mv /home/$username/avius-dotfiles/alacritty.yml /home/$username/.alacritty.yml
-chown $username /home/$username/.alacritty.yml
+chown $username:$username /home/$username/.alacritty.yml
 rm -rf /home/$username/avius-dotfiles
 
 # Install Fira Code
@@ -95,7 +95,7 @@ apt install -y fonts-firacode 1>/dev/null 2>/dev/null
 
 # Create the themes and icons folders-
 mkdir /home/$username/.themes /home/$username/.icons
-chown -R $username /home/$username/.themes; chown -R $username /home/$username/.icons
+chown -R $username:$username /home/$username/.themes; chown -R $username /home/$username/.icons
 
 # Download wallpapers
 echo -e "${CYAN}[+] Downloading some pogchamp wallpapers into /home/$username/Pictures/Wallpapers/ ${DEFAULT}"
@@ -108,7 +108,7 @@ wget --quiet -O orange-fantasy.jpg https://i.redd.it/i3wcpwczqjb61.jpg
 wget --quiet -O nature-arch.jpg https://i.redd.it/k35ttt1qara61.jpg
 wget --quiet -O space-man.jpg https://i.redd.it/598n7rn58gb61.jpg
 wget --quiet -O prey-wallpaper.jpg https://i.redd.it/9pczisi1jba61.jpg
-chown -R $username /home/$username/Pictures/Wallpapers
+chown -R $username:$username /home/$username/Pictures/Wallpapers
 
 # Open GRUB theme preview website-
 echo -e "\n${DEFAULTBOLD}Note: In the next step, you will be prompted to choose a GRUB theme. A website will open where you can preview each theme before choosing one for yourself.${DEFAULT}"
