@@ -32,7 +32,8 @@ fi
 username=$1
 
 # Update and upgrade
-apt update 1>/dev/null 2>/dev/null && apt upgrade -y 1>/dev/null 2>/dev/null
+echo -e "\n${CYAN}[+] Updating package lists and upgrading software...${DEFAULT}"
+apt update && apt upgrade -y
 
 # Install Git
 echo -e "\n${CYAN}[+] Installing Git${DEFAULT}"
