@@ -75,6 +75,10 @@ update-desktop-database
 rm -rf /home/$username/Downloads/alacritty
 cd /home/$username
 
+# Make Alacritty the default terminal
+update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50
+update-alternatives --config x-terminal-emulator
+
 # Download custom alacritty config-
 echo -e "\n${BLUE}[+] Customizing Alacritty${DEFAULT}"
 
