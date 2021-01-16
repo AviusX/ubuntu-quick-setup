@@ -26,44 +26,46 @@ if id "$1" &>/dev/null; then
     echo -e "${GREEN}[+] Starting auto setup${DEFAULT}" 
 else
     echo -e "${RED}[-] Entered username does not exist. Please check if you entered it correctly.${DEFAULT}" 
+    exit
 fi
 
 username=$1
 
 # Update and upgrade
-apt update && apt upgrade -y
+apt update 1>/dev/null 2>/dev/null && apt upgrade -y 1>/dev/null 2>/dev/null
 
 # Install Git
-echo -e "${BLUE}[+] Installing Git${DEFAULT}"
-apt install -y git
+echo -e "\n${BLUE}[+] Installing Git${DEFAULT}"
+apt install -y git 1>/dev/null 2>/dev/null
 
 # Install Gnome Tweaks
-echo -e "${BLUE}[+] Installing Gnome Tweaks${DEFAULT}"
-apt install -y gnome-tweaks
+echo -e "\n${BLUE}[+] Installing Gnome Tweaks${DEFAULT}"
+apt install -y gnome-tweaks 1>/dev/null 2>/dev/null
 
 # Install Brave Browser
-echo -e "${BLUE}[+] Installing Brave Browser${DEFAULT}"
+echo -e "\n${BLUE}[+] Installing Brave Browser${DEFAULT}"
 
-apt install -y apt-transport-https curl gnupgcurl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-
+apt install -y apt-transport-https curl gnupg 1>/dev/null 2>/dev/null
+curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
 echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
 
-apt update
-apt install -y brave-browser
+apt update 1>/dev/null 2>/dev/null
+apt install -y brave-browser 1>/dev/null 2>/dev/null
 
 # Install common utils
-echo -e "${BLUE}[+] Installing neovim${DEFAULT}"
-apt install -y nvim 
+echo -e "\n${BLUE}[+] Installing neovim${DEFAULT}"
+apt install -y neovim 1>/dev/null 2>/dev/null
 
 # Install snap garbage
-echo -e "${BLUE}[+] Installing VLC${DEFAULT}"
+echo -e "\n${BLUE}[+] Installing VLC${DEFAULT}"
 snap install vlc
 
 # Install Alacritty
-echo -e "${BLUE}[+] Building and installing Alacritty${DEFAULT}"
+echo -e "\n${BLUE}[+] Building and installing Alacritty${DEFAULT}"
 
-apt-get install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3
-cd /home/$username/Downloads; git clone https://github.com/alacritty/alacritty/
+apt install -y cargo 1>/dev/null 2>/dev/null
+apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 1>/dev/null 2>/dev/null
+cd /home/$username/Downloads; git clone https://github.com/alacritty/alacritty/ 1>/dev/null
 cd alacritty; cargo build --release
 cp target/release/alacritty /usr/local/bin
 cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
@@ -74,12 +76,16 @@ rm -rf /home/$username/Downloads/alacritty
 cd /home/$username
 
 # Download custom alacritty config-
-echo -e "${BLUE}[+] Customizing Alacritty${DEFAULT}"
+echo -e "\n${BLUE}[+] Customizing Alacritty${DEFAULT}"
 
-git clone https://github.com/AviusX/dotfiles avius-dotfiles
+git clone https://github.com/AviusX/dotfiles avius-dotfiles 1>/dev/null
 mv /home/$username/avius-dotfiles/alacritty.yml /home/$username/.alacritty.yml
 chown $username /home/$username/.alacritty.yml
 rm -rf /home/$username/avius-dotfiles
+
+# Install Fira Code
+echo -e "\n${BLUE}[+] Installing font firacode${DEFAULT}"
+apt install -y fonts-firacode 1>/dev/null 2>/dev/null
 
 # Create the themes and icons folders-
 mkdir /home/$username/.themes /home/$username/.icons
@@ -89,8 +95,8 @@ chown -R $username /home/$username/.themes; chown -R $username /home/$username/.
 echo -e "\n${DEFAULTBOLD}Note: In the next step, you will be prompted to choose a GRUB theme. A website will open where you can preview each theme before choosing one for yourself.${DEFAULT}"
 read -n 1 -s -r -p "Press any key to continue..."
 
-echo -e "${BLUE}[+] Opening website for theme preview...${DEFAULT}"
-xdg-open 'https://github.com/vinceliuice/grub2-themes' &
+echo -e "\n\n${BLUE}[+] Opening website for theme preview...${DEFAULT}"
+sudo -u $username brave-browser-stable 'https://github.com/vinceliuice/grub2-themes' & 1>/dev/null 2>/dev/null
 
 # Install Grub Theme
 echo -e "\n${YELLOW}Available GRUB themes-"
@@ -116,4 +122,4 @@ cd grub-theme; ./install.sh $flag
 rm -rf /home/$username/Downloads/grub-theme
 
 # DONE!
-echo -e "${GREEN}[*] DONE! Welcome to Linux and enjoy your fresh install!${DEFAULT}"
+echo -e "\n\n${GREEN}[*] DONE! Welcome to Linux and enjoy your fresh install!${DEFAULT}"
