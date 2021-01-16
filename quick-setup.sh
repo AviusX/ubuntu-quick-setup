@@ -97,6 +97,19 @@ apt install -y fonts-firacode 1>/dev/null 2>/dev/null
 mkdir /home/$username/.themes /home/$username/.icons
 chown -R $username /home/$username/.themes; chown -R $username /home/$username/.icons
 
+# Download wallpapers
+echo -e "${CYAN}[+] Downloading some pogchamp wallpapers into /home/$username/Pictures/Wallpapers/ ${DEFAULT}"
+cd /home/$username/Pictures/; mkdir Wallpapers; cd Wallpapers
+wget --quiet -O shooting-star.png https://i.redd.it/m23bwh4n0x151.png
+wget --quiet -O astronaut.png https://i.redd.it/h6f70szyude31.png
+wget --quiet -O joker.png https://i.redd.it/e7hunasn67641.png
+wget --quiet -O cyber-city.jpg https://i.redd.it/c9iwoawbdo861.jpg
+wget --quiet -O orange-fantasy.jpg https://i.redd.it/i3wcpwczqjb61.jpg
+wget --quiet -O nature-arch.jpg https://i.redd.it/k35ttt1qara61.jpg
+wget --quiet -O space-man.jpg https://i.redd.it/598n7rn58gb61.jpg
+wget --quiet -O prey-wallpaper.jpg https://i.redd.it/9pczisi1jba61.jpg
+chown -R $username /home/$username/Pictures/Wallpapers
+
 # Open GRUB theme preview website-
 echo -e "\n${DEFAULTBOLD}Note: In the next step, you will be prompted to choose a GRUB theme. A website will open where you can preview each theme before choosing one for yourself.${DEFAULT}"
 read -n 1 -s -r -p "Press any key to continue..."
@@ -126,19 +139,6 @@ done
 cd /home/$username/Downloads; git clone https://github.com/vinceliuice/grub2-themes grub-theme
 cd grub-theme; ./install.sh $flag
 rm -rf /home/$username/Downloads/grub-theme
-
-# Download wallpapers
-echo -e "${CYAN}[+] Downloading some pogchamp wallpapers into /home/$username/Pictures/Wallpapers/ ${DEFAULT}"
-cd /home/$username/Pictures/; mkdir Wallpapers; cd Wallpapers
-wget --quiet -O shooting-star.png https://i.redd.it/m23bwh4n0x151.png
-wget --quiet -O astronaut.png https://i.redd.it/h6f70szyude31.png
-wget --quiet -O joker.png https://i.redd.it/e7hunasn67641.png
-wget --quiet -O cyber-city.jpg https://i.redd.it/c9iwoawbdo861.jpg
-wget --quiet -O orange-fantasy.jpg https://i.redd.it/i3wcpwczqjb61.jpg
-wget --quiet -O nature-arch.jpg https://i.redd.it/k35ttt1qara61.jpg
-wget --quiet -O space-man.jpg https://i.redd.it/598n7rn58gb61.jpg
-wget --quiet -O prey-wallpaper.jpg https://i.redd.it/9pczisi1jba61.jpg
-chown -R $username /home/$username/Pictures/Wallpapers
 
 # DONE!
 echo -e "\n\n${GREEN}[*] DONE! Welcome to Linux and enjoy your fresh install!${DEFAULT}"
