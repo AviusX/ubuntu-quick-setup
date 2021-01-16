@@ -138,6 +138,7 @@ wget --quiet -O orange-fantasy.jpg https://i.redd.it/i3wcpwczqjb61.jpg
 wget --quiet -O nature-arch.jpg https://i.redd.it/k35ttt1qara61.jpg
 wget --quiet -O space-man.jpg https://i.redd.it/598n7rn58gb61.jpg
 wget --quiet -O prey-wallpaper.jpg https://i.redd.it/9pczisi1jba61.jpg
+chown -R $username /home/$username/Pictures/Wallpapers
 
 # DONE!
 echo -e "\n\n${GREEN}[*] DONE! Welcome to Linux and enjoy your fresh install!${DEFAULT}"
