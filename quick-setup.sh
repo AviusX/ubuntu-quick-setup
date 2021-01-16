@@ -77,8 +77,9 @@ rm -rf /home/$username/Downloads/alacritty
 cd /home/$username
 
 # Make Alacritty the default terminal
-update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50
-update-alternatives --config x-terminal-emulator
+echo -e "${CYAN}[+] Setting Alacritty as the default termnal emulator${DEFAULT}"
+update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/alacritty 50
+echo 0 | update-alternatives --config x-terminal-emulator && echo
 
 # Download custom alacritty config-
 echo -e "${CYAN}[+] Customizing Alacritty${DEFAULT}"
@@ -101,7 +102,7 @@ echo -e "\n${DEFAULTBOLD}Note: In the next step, you will be prompted to choose 
 read -n 1 -s -r -p "Press any key to continue..."
 
 echo -e "\n\n${CYAN}[+] Opening website for theme preview...${DEFAULT}"
-sudo -u $username brave-browser-stable 'https://github.com/vinceliuice/grub2-themes' 1>/dev/null 2>/dev/null & 
+sudo -u $username brave-browser-stable 'https://github.com/vinceliuice/grub2-themes#screenshots' 1>/dev/null 2>/dev/null & 
 
 # Install Grub Theme
 echo -e "\n${YELLOW}Available GRUB themes-"
@@ -125,6 +126,18 @@ done
 cd /home/$username/Downloads; git clone https://github.com/vinceliuice/grub2-themes grub-theme
 cd grub-theme; ./install.sh $flag
 rm -rf /home/$username/Downloads/grub-theme
+
+# Download wallpapers
+echo -e "${CYAN}[+] Downloading some pogchamp wallpapers into /home/$username/Pictures/Wallpapers/ ${DEFAULT}"
+cd /home/$username/Pictures/; mkdir Wallpapers; cd Wallpapers
+wget --quiet -O shooting-star.png https://i.redd.it/m23bwh4n0x151.png
+wget --quiet -O astronaut.png https://i.redd.it/h6f70szyude31.png
+wget --quiet -O joker.png https://i.redd.it/e7hunasn67641.png
+wget --quiet -O cyber-city.jpg https://i.redd.it/c9iwoawbdo861.jpg
+wget --quiet -O orange-fantasy.jpg https://i.redd.it/i3wcpwczqjb61.jpg
+wget --quiet -O nature-arch.jpg https://i.redd.it/k35ttt1qara61.jpg
+wget --quiet -O space-man.jpg https://i.redd.it/598n7rn58gb61.jpg
+wget --quiet -O prey-wallpaper.jpg https://i.redd.it/9pczisi1jba61.jpg
 
 # DONE!
 echo -e "\n\n${GREEN}[*] DONE! Welcome to Linux and enjoy your fresh install!${DEFAULT}"
