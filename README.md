@@ -20,5 +20,5 @@ Currently, the script does the following things-
 
 Simply run the following command, sit back and relax as the script sets up everything for you-
 ```bash
-wget -q https://raw.githubusercontent.com/AviusX/ubuntu-quick-setup/master/quick-setup.sh -O - | sudo bash -s $USER
+wget -q https://raw.githubusercontent.com/AviusX/ubuntu-quick-setup/master/quick-setup.sh -O quick-setup.sh && chmod +x quick-setup.sh; sudo ./quick-setup.sh $USER && rm quick-setup.sh
 ```
